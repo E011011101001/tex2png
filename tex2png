@@ -1,0 +1,12 @@
+#!/bin/sh
+
+outname=formula.png
+[ -z $2 ] || outname=$2
+
+templatename="tex2png_formula"
+
+pdflatex "\def\formula{$1}\input{/usr/local/share/tex2png/${templatename}.tex}" >/dev/null 2>&1
+convert -density 300 ${templatename}.pdf -quality 90 $outname >/dev/null 2>&1
+rm ${templatename}.{log,aux,pdf}
+open "$outname"
+
