@@ -5,7 +5,7 @@ outname=formula.png
 
 templatename="tex2png_formula"
 
-pdflatex "\def\formula{$1}\input{/usr/local/share/tex2png/${templatename}.tex}" >/dev/null 2>&1
+pdflatex -interaction nonstopmode "\def\formula{$1}\input{/usr/local/share/tex2png/${templatename}.tex}" | awk '/!/,/]/'
 convert -density 300 ${templatename}.pdf -quality 90 $outname >/dev/null 2>&1
 rm ${templatename}.{log,aux,pdf}
 open "$outname"
